@@ -216,12 +216,13 @@ Bridge.getRaster = function(source, map, im, z, x, y, callback) {
                 pixel_key = r +','+ g + ',' + b + ',' + a;
             }
 
-            image.encode('webp', {}, function(err, buffer) {
+            var format = source._uri.format || 'webp';
+            image.encode(format, {}, function(err, buffer) {
                 if (err) {
                     return callback(err);
                 }
                 buffer.solid = pixel_key;
-                return callback(err, buffer, {'Content-Type':'image/webp'});
+                return callback(err, buffer, {'Content-Type':'image/' + format});
             });
         });
     });

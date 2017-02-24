@@ -20,7 +20,8 @@ var xml = {
 var rasterxml = {
     a: fs.readFileSync(path.resolve(path.join(__dirname,'/raster-a.xml')), 'utf8'),
     b: fs.readFileSync(path.resolve(path.join(__dirname,'/raster-b.xml')), 'utf8'),
-    c: fs.readFileSync(path.resolve(path.join(__dirname,'/raster-c.xml')), 'utf8')
+    c: fs.readFileSync(path.resolve(path.join(__dirname,'/raster-c.xml')), 'utf8'),
+    png: fs.readFileSync(path.resolve(path.join(__dirname,'/raster-png.xml')), 'utf8')
 };
 
 (function() {
@@ -496,3 +497,31 @@ function compare_vtiles(assert,filepath,vtile1,vtile2) {
         });
     });
 })();
+
+(function() {
+    var source = new Bridge({ xml:rasterxml.png, base:path.join(__dirname,'/'), blank:false, format: 'png' });
+    var tests = {
+        a: ['0.0.0', '1.0.0', '2.1.1', '3.2.2', '4.3.3', '5.4.4'],
+        b: ['0.0.0', '1.0.0'],
+        c: ['0.0.0', '1.0.0']
+    };
+    tape('setup', function(assert) {
+        source.open(function(err) {
+            assert.ifError(err);
+            assert.end();
+        })
+    });
+    tape('should render with Content-Type: png', function(assert) {
+        source.getTile(0,0,0, function(err, buffer, headers) {
+            assert.ifError(err);
+            assert.equal(headers['Content-Type', 'image/png']);
+            assert.end();
+        });
+    });
+    tape('teardown', function(assert) {
+        source.close(function() {
+            assert.end();
+        })
+    });
+})();
+

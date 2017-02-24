@@ -1,5 +1,10 @@
 # Changlog
 
+## 2.3.1-sg
+
+ - Support format parameter for raster sources
+ - Use @mapbox/sphericalmercator
+
 ## 2.3.1
 
  - Add try/catch around mapnik.VectorTile constructor to prevent invalid parameters from causing a throw
