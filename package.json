@@ -1,6 +1,6 @@
 {
   "name": "@mapbox/tilelive-bridge",
-  "version": "2.4.0-sg",
+  "version": "2.5.1-smartgeomatic.1",
   "main": "./index.js",
   "description": "Datasource => vector tiles bridge backend for tilelive",
   "repository": {
@@ -12,6 +12,9 @@
       "type": "BSD"
     }
   ],
+  "publishConfig": {
+    "registry": "https://smartgeomatic.org/npm/"
+  },
   "dependencies": {
     "mapnik": "~3.6.0",
     "@mapbox/sphericalmercator": "~1.0.1",
