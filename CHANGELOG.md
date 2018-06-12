@@ -1,5 +1,10 @@
 # Changlog
 
+## 3.0.0-smartgeomatic.1
+
+- Update mapnik to 3.7.0
+- Add option to limit tiles by size in bytes
+
 ## 2.3.1-sg
 
  - Support format parameter for raster sources
